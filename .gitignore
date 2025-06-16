@@ -1,0 +1,95 @@
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# If using Django's default file-based cache or local email files
+*.cache
+*.log
+*.mail
+
+# Environment
+.env
+.env.*
+
+# Pytest
+.pytest_cache/
+.cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# Pylint
+pylint-report.txt
+pylint-global.txt
+
+# pyright
+.pyright/
+
+# Type hints
+typings/
+
+# virtualenv
+venv/
+env/
+ENV/
+.venv/
+
+# pip-tools
+*.txt~
+pip-wheel-metadata/
+
+# Build / Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+MANIFEST
+
+# Node (if using JS tools for front-end)
+node_modules/
+*.tsbuildinfo
+
+# Static & Media (optional, if dynamically generated or uploaded)
+staticfiles/
+media/
+mediafiles/
+
+# Docker
+*.pid
+*.pid.lock
+
+# Gunicorn
+gunicorn.log
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SQLite backups
+*.sqlite3*
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
