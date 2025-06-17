@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Create Ticket</h1>
+
+<form action="{% url 'create_ticket' %}" method="post">
+
+    {% csrf_token %}
+    <!-- title -->
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" id="title" aria-describedby="">
+    </div>
+    <!-- end title -->
+
+    <!-- description -->
+    <div class="mb-3">
+        <label for="description" class="form-label">description</label>
+        <input type="text" class="form-control" name="description" id="description" aria-describedby="">
+    </div>
+    <!-- end description -->
+
+    <div>
+        <button type="submit" class="btn btn-primary">Create Ticket</button>
+    </div>
+    
+
+</form>
+
+{% endblock %}
