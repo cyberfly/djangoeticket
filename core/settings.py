@@ -67,12 +67,20 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 
 LOGIN_REDIRECT_URL = "/"
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# For production: where static files are collected to be served by nginx
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
