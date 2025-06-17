@@ -21,6 +21,32 @@
     </div>
     <!-- end description -->
 
+    <!-- category -->
+    <div class="mb-3">
+        <label for="category_id" class="form-label">category</label>
+        <select name="category_id" id="category_id" class="form-select">
+            <option value="">Select Category</option>
+            
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <!-- end category -->
+
+    <!-- department -->
+    <div class="mb-3">
+        <label for="department_id" class="form-label">department</label>
+        <select name="department_id" id="department_id" class="form-select">
+            <option value="">Select department</option>
+            
+            {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <!-- end department -->
+
     <div>
         <button type="submit" class="btn btn-primary">Create Ticket</button>
     </div>
