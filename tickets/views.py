@@ -7,6 +7,16 @@ from .forms import CreateTicketForm
 def home(request):
     return render(request, "home.html")
 
+def index(request):
+
+    tickets = Ticket.objects.filter(user=request.user).order_by("-created_at")
+    # breakpoint()
+    context = {
+        "tickets": tickets,
+    }
+
+    return render(request, "tickets/index.html", context)
+    
 
 def create(request):
 
