@@ -2,7 +2,11 @@
 
 {% block content %}
 
+<a href="{% url 'create_ticket' %}" class="btn btn-primary">New Ticket</a>
+
 <h1>Ticket List</h1>
+
+{% include 'includes/alert.html' %}
 
 <!-- filter -->
 <div class="mb-3">

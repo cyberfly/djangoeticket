@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Ticket
 from lookups.models import Department, Category
 from .forms import CreateTicketForm
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -60,7 +61,6 @@ def create(request):
         form = CreateTicketForm(request.POST)
 
         if form.is_valid():
-
             # get data from post request
             title = request.POST.get("title", "")
             description = request.POST.get("description", "")
@@ -80,6 +80,8 @@ def create(request):
                 category=category,
             )
 
+            messages.success(request, 'Ticket created successfully!')
+            return redirect('index_ticket')
     else:
         # bila papar form
         form = CreateTicketForm()
