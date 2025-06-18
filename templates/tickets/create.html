@@ -4,11 +4,7 @@
 
 <h1>Create Ticket</h1>
 
-{% if form.errors %}
-<div class="alert alert-danger">
-    <p>Validation errors. Please fix before continue</p>
-</div>
-{% endif %}
+{% include 'includes/alert.html' %}
 
 <form action="{% url 'create_ticket' %}" method="post">
 
