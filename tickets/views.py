@@ -4,11 +4,13 @@ from lookups.models import Department, Category
 from .forms import CreateTicketForm
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
     return render(request, "home.html")
 
+@login_required
 def index(request):
 
     tickets = Ticket.objects.filter(user=request.user).order_by("-created_at")
@@ -49,7 +51,7 @@ def index(request):
 
     return render(request, "tickets/index.html", context)
     
-
+@login_required
 def create(request):
 
     if request.method == "POST":
