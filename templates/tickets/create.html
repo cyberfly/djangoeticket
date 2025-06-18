@@ -37,9 +37,13 @@
             <option value="">Select Category</option>
             
             {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
+                <option value="{{ category.id }}" {% if form.category_id.value|stringformat:"s" == category.id|stringformat:"s" %}selected{% endif %} >{{ category.name }}</option>
             {% endfor %}
         </select>
+
+        {% if form.category_id.errors %}
+            <div class="text-danger">{{ form.category_id.errors.0 }}</div>
+        {% endif %}
     </div>
     <!-- end category -->
 
@@ -50,7 +54,7 @@
             <option value="">Select department</option>
             
             {% for department in departments %}
-                <option value="{{ department.id }}">{{ department.name }}</option>
+                <option value="{{ department.id }}" {% if form.department_id.value|stringformat:"s" == department.id|stringformat:"s" %}selected{% endif %} >{{ department.name }}</option>
             {% endfor %}
         </select>
     </div>
