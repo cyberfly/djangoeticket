@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Ticket
 from lookups.models import Department, Category
 from .forms import CreateTicketForm
@@ -99,3 +99,17 @@ def create(request):
     }
 
     return render(request, "tickets/create.html", context)
+
+@login_required
+def show(request, ticket_id):
+    print("Ticket ID:", ticket_id)
+
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+
+    context = {
+        "ticket": ticket,
+    }
+
+    return render(request, "tickets/show.html", context)
+    
+    
