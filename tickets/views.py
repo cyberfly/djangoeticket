@@ -12,11 +12,21 @@ def index(request):
 
     tickets = Ticket.objects.filter(user=request.user).order_by("-created_at")
 
+    title = request.GET.get("title", "")
     category_id = request.GET.get("category_id", "")
+    department_id = request.GET.get("department_id", "")
+
+    if title:
+        # filter tickets by id from category model
+        tickets = tickets.filter(title__icontains=title)
 
     if category_id:
         # filter tickets by id from category model
         tickets = tickets.filter(category__id=category_id)
+
+    if department_id:
+        # filter tickets by id from department model
+        tickets = tickets.filter(department__id=department_id)
 
     # initialize paginator
     page_size = 5
