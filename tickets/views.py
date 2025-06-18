@@ -12,6 +12,12 @@ def index(request):
 
     tickets = Ticket.objects.filter(user=request.user).order_by("-created_at")
 
+    category_id = request.GET.get("category_id", "")
+
+    if category_id:
+        # filter tickets by id from category model
+        tickets = tickets.filter(category__id=category_id)
+
     # initialize paginator
     page_size = 5
     paginator = Paginator(tickets, page_size)
@@ -20,9 +26,14 @@ def index(request):
     # breakpoint()
     # end initialize paginator
 
+    categories = Category.objects.all()
+    departments = Department.objects.all()
+
     # breakpoint()
     context = {
         "page_obj": page_obj,
+        "categories": categories,
+        "departments": departments,
     }
 
     return render(request, "tickets/index.html", context)

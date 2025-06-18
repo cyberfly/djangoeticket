@@ -3,6 +3,53 @@
 {% block content %}
 
 <h1>Ticket List</h1>
+
+<!-- filter -->
+<div class="mb-3">
+
+    <form action="{% url 'index_ticket' %}" method="GET">
+
+        <div class="mb-3">
+            <label for="">Title</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="Search by title" value="{{ request.GET.title|default:'' }}">
+        </div>
+
+        <!-- category -->
+        <div class="mb-3">
+            <label for="category_id" class="form-label">category</label>
+            <select name="category_id" id="category_id" class="form-select">
+                <option value="">Select Category</option>
+                
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if request.GET.category_id|stringformat:"s" == category.id|stringformat:"s" %}selected{% endif %} >{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- end category -->
+
+        <!-- department -->
+        <div class="mb-3">
+            <label for="department_id" class="form-label">department</label>
+            <select name="department_id" id="department_id" class="form-select">
+                <option value="">Select department</option>
+                
+                {% for department in departments %}
+                    <option value="{{ department.id }}" {% if request.GET.department_id|stringformat:"s" == department.id|stringformat:"s" %}selected{% endif %} >{{ department.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- end department -->
+
+        <div>
+            <button type="submit" class="btn btn-secondary">Search</button>
+        </div>
+
+    </form>
+
+    
+</div>
+<!-- end filter -->
+
 <table class="table table-striped">
     <thead>
         <tr>
