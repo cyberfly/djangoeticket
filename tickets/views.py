@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Ticket
 from lookups.models import Department, Category
 from .forms import CreateTicketForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -10,9 +11,18 @@ def home(request):
 def index(request):
 
     tickets = Ticket.objects.filter(user=request.user).order_by("-created_at")
+
+    # initialize paginator
+    page_size = 5
+    paginator = Paginator(tickets, page_size)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    # breakpoint()
+    # end initialize paginator
+
     # breakpoint()
     context = {
-        "tickets": tickets,
+        "page_obj": page_obj,
     }
 
     return render(request, "tickets/index.html", context)
