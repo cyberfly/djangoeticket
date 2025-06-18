@@ -10,14 +10,23 @@
     <!-- title -->
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" name="title" id="title" aria-describedby="">
+        <input type="text" class="form-control" name="title" id="title" value="{{ form.title.value|default:'' }}" aria-describedby="">
+
+        {% if form.title.errors %}
+            <div class="text-danger">{{ form.title.errors.0 }}</div>
+        {% endif %}
+
     </div>
     <!-- end title -->
 
     <!-- description -->
     <div class="mb-3">
         <label for="description" class="form-label">description</label>
-        <input type="text" class="form-control" name="description" id="description" aria-describedby="">
+        <input type="text" class="form-control" name="description" id="description" value="{{ form.description.value|default:'' }}" aria-describedby="">
+
+        {% if form.description.errors %}
+            <div class="text-danger">{{ form.description.errors.0 }}</div>
+        {% endif %}
     </div>
     <!-- end description -->
 

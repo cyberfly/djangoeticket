@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Ticket
 from lookups.models import Department, Category
-
+from .forms import CreateTicketForm
 
 # Create your views here.
 def home(request):
@@ -16,28 +16,32 @@ def create(request):
         #  print untuk lihat data yang dihantar
         print("Form data", request.POST)
 
-        # get data from post request
-        title = request.POST.get("title", "")
-        description = request.POST.get("description", "")
-        category_id = request.POST.get("category_id", "")
-        department_id = request.POST.get("department_id", "")
+        form = CreateTicketForm(request.POST)
 
-        user = request.user
-        department = Department.objects.get(id=department_id)
-        category = Category.objects.get(id=category_id)
+        if form.is_valid():
 
-        # try create a new ticket
-        Ticket.objects.create(
-            title=title,
-            description=description,
-            user=user,
-            department=department,
-            category=category,
-        )
+            # get data from post request
+            title = request.POST.get("title", "")
+            description = request.POST.get("description", "")
+            category_id = request.POST.get("category_id", "")
+            department_id = request.POST.get("department_id", "")
+
+            user = request.user
+            department = Department.objects.get(id=department_id)
+            category = Category.objects.get(id=category_id)
+
+            # try create a new ticket
+            Ticket.objects.create(
+                title=title,
+                description=description,
+                user=user,
+                department=department,
+                category=category,
+            )
 
     else:
         # bila papar form
-        pass
+        form = CreateTicketForm()
 
     # load additional data for the form
     departments = Department.objects.all()
@@ -46,6 +50,7 @@ def create(request):
     context = {
         "departments": departments,
         "categories": categories,
+        "form": form,
     }
 
     return render(request, "tickets/create.html", context)
