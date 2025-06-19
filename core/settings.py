@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'tickets',
     'allauth',  
     'allauth.account',
-    'django_extensions'
+    'django_extensions',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +118,9 @@ EMAIL_USE_TLS = False
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
 
 
 # Password validation
