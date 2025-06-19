@@ -5,6 +5,7 @@ from .forms import CreateTicketForm
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 
 # Create your views here.
 def home(request):
@@ -74,13 +75,39 @@ def create(request):
             category = Category.objects.get(id=category_id)
 
             # try create a new ticket
-            Ticket.objects.create(
+            ticket = Ticket.objects.create(
                 title=title,
                 description=description,
                 user=user,
                 department=department,
                 category=category,
             )
+
+            # send email notification to user
+            email_body = f"""<h1>New Ticket Created</h1>
+            
+            <h3>Ticket Title: {ticket.title}</h3>
+            <p>Ticket Description: {ticket.description}</p>
+            <p>Category: {ticket.category.name}</p>
+            <p>Department: {ticket.department.name}</p>
+            <p>Status: {ticket.status}</p>
+            <p>User: {ticket.user.username}</p>
+            <p>Thank you for using our e-ticketing system.</p>
+            <p>Best regards,</p>
+            <p>E-Ticketing System</p>
+            
+            """
+
+            email = EmailMessage(
+                subject='New Ticket Created',
+                body=email_body,
+                from_email='system@eticketing.test',
+                to=['admin@eticketing.test']
+            )
+            email.content_subtype = "html"
+            email.send()
+            # end send email notification to user
+
 
             messages.success(request, 'Ticket created successfully!')
             return redirect('index_ticket')
