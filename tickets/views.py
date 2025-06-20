@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .tasks import send_new_ticket_email
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
 def home(request):
@@ -107,6 +108,8 @@ def create(request):
     return render(request, "tickets/create.html", context)
 
 @login_required
+@permission_required("tickets.view_ticket")
+
 def show(request, ticket_id):
     print("Ticket ID:", ticket_id)
 

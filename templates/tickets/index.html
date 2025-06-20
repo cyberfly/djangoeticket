@@ -77,7 +77,10 @@
             <td>{{ ticket.category.name }}</td>
             <td>{{ ticket.department.name }}</td>
             <td>
+
+                {% if perms.tickets.view_ticket %}
                 <a href="{% url 'show_ticket' ticket_id=ticket.id %}" class="btn btn-info">View Ticket</a>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
