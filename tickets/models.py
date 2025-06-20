@@ -13,6 +13,14 @@ class Ticket(models.Model):
         related_name='tickets'
     )
 
+    assignee = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+        related_name='assignee_tickets',
+        null=True,
+        blank=True
+    )
+
     department = models.ForeignKey(
         Department, 
         on_delete=models.CASCADE,
